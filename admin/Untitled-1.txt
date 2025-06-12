@@ -1,0 +1,27 @@
+<?php
+//$conn=mysqli_connect('localhost','root','','mydatabase');
+if(isset($_POST['btn'])){
+ $filename=$_FILES['file']['name'];
+ $filesize=$_FILES['file']['size'];
+ $filetmpname=$_FILES['file']['tmp_name'];
+ $filetype=$_FILES['file']['type'];
+ $filestore="../uploads/".$filename;
+ if(move_uploaded_file($filetmpname,$filestore))
+ {
+$insert = "INSERT INTO cake_shop_admin_registrations (image) values ('$filename')";
+
+   //$sql="insert into img_up( filename,filestore)values('$filename','$filestore')";
+   if(mysqli_query($conn,$insert)){
+      echo"img inserted";
+   }
+   else{
+      echo"error inserted".$conn->error;
+
+   }
+ }
+ else{
+    echo "error";
+ }
+
+}
+?>
